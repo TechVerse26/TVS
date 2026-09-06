@@ -1,0 +1,113 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Helper Functions ─────────────────────────────────────
+    function isLoggedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isLoggedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return isLoggedIn() && request.auth.token.admin == true;
+    }
+
+    function isValidText(text, maxLen) {
+      return text is string && text.size() > 0 && text.size() <= maxLen;
+    }
+
+    // ─── Posts ────────────────────────────────────────────────
+    // যে কেউ পড়তে পারবে, শুধু Admin লিখতে পারবে
+    match /posts/{postId} {
+      allow read  : if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin()
+                    || (isLoggedIn() && request.resource.data.diff(resource.data).affectedKeys()
+                        .hasOnly(['views']));  // view count যে কেউ বাড়াতে পারবে
+      allow delete: if isAdmin();
+    }
+
+    // ─── Courses ──────────────────────────────────────────────
+    match /courses/{courseId} {
+      allow read  : if true;
+      allow write  : if isAdmin();
+
+      // Lessons (sub-collection)
+      match /lessons/{lessonId} {
+        allow read  : if true;
+        allow write  : if isAdmin();
+      }
+    }
+
+    // ─── Enrollments ──────────────────────────────────────────
+    // ইউজার শুধু নিজের enrollment পড়তে ও আপডেট করতে পারবে
+    match /enrollments/{enrollId} {
+      allow read  : if isLoggedIn()
+                    && resource.data.uid == request.auth.uid;
+      allow create: if isLoggedIn()
+                    && request.resource.data.uid == request.auth.uid;
+      allow update: if isOwner(resource.data.uid)
+                    && request.resource.data.diff(resource.data)
+                       .affectedKeys().hasOnly(['completedLessons', 'completed', 'completedAt']);
+      allow delete: if false; // enrollment মুছা যাবে না
+    }
+
+    // ─── Comments ─────────────────────────────────────────────
+    match /comments/{commentId} {
+      allow read  : if true;
+      allow create: if isLoggedIn()
+                    && isValidText(request.resource.data.text, 1000)
+                    && request.resource.data.uid == request.auth.uid
+                    && !request.resource.data.text.matches('.*https?://.*'); // spam link block
+      allow update: if isLoggedIn()
+                    && request.resource.data.diff(resource.data)
+                       .affectedKeys().hasOnly(['likes']); // শুধু like আপডেট করা যাবে
+      allow delete: if isOwner(resource.data.uid) || isAdmin();
+    }
+
+    // ─── Bookmarks ────────────────────────────────────────────
+    match /bookmarks/{bmId} {
+      allow read  : if isLoggedIn()
+                    && resource.data.uid == request.auth.uid;
+      allow create: if isLoggedIn()
+                    && request.resource.data.uid == request.auth.uid;
+      allow delete: if isOwner(resource.data.uid);
+      allow update: if false;
+    }
+
+    // ─── Notifications ────────────────────────────────────────
+    match /notifications/{notifId} {
+      allow read  : if isOwner(resource.data.uid);
+      allow create: if isAdmin(); // শুধু Admin নোটিফিকেশন পাঠাতে পারবে
+      allow update: if isOwner(resource.data.uid)
+                    && request.resource.data.diff(resource.data)
+                       .affectedKeys().hasOnly(['read']); // শুধু read status বদলাতে পারবে
+      allow delete: if isOwner(resource.data.uid) || isAdmin();
+    }
+
+    // ─── FCM Tokens ───────────────────────────────────────────
+    match /fcm_tokens/{uid} {
+      allow read, write: if isOwner(uid);
+    }
+
+    // ─── Users (Profile) ──────────────────────────────────────
+    match /users/{uid} {
+      allow read  : if true;       // public profile দেখা যাবে
+      allow create: if isOwner(uid);
+      allow update: if isOwner(uid)
+                    && !request.resource.data.diff(resource.data)
+                       .affectedKeys().hasAny(['role', 'admin']); // role নিজে বদলাতে পারবে না
+      allow delete: if false;
+    }
+
+    // ─── Admin Collection ─────────────────────────────────────
+    match /admin/{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+  }
+}
