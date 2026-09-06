@@ -37,7 +37,7 @@ export async function renderPost() {
             ${post.category ? `<a href="/blog?cat=${post.category}" class="post-category">${post.category}</a>` : ''}
             <span class="post-date">${date}</span>
             ${post.readTime ? `<span class="post-read">${post.readTime} পড়া</span>` : ''}
-            ${post.views   ? `<span class="post-views">👁 ${post.views} ভিউ</span>` : ''}
+            ${post.views   ? `<span class="post-views"><i class="fa-solid fa-eye icon-muted"></i> ${post.views} ভিউ</span>` : ''}
           </div>
           <h1 class="post-page-title">${post.title}</h1>
           ${post.excerpt ? `<p class="post-page-excerpt">${post.excerpt}</p>` : ''}
@@ -45,7 +45,7 @@ export async function renderPost() {
           <div class="post-content">${html}</div>
 
           <div class="post-footer-actions">
-            <button class="btn btn-ghost" onclick="history.back()">← ফিরে যান</button>
+            <button class="btn btn-ghost" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i> ফিরে যান</button>
             ${Bookmark.buttonHTML(id)}
           </div>
 

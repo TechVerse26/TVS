@@ -8,7 +8,7 @@ export async function renderTools() {
   el.innerHTML = `
     <div class="page-hero small-hero">
       <div class="container">
-        <div class="hero-badge">🛠️ Tech Verse ইকোসিস্টেম</div>
+        <div class="hero-badge"><i class="fa-solid fa-screwdriver-wrench icon-accent"></i> Tech Verse ইকোসিস্টেম</div>
         <h1>টুলস ডিরেক্টরি</h1>
         <p>Tech Verse-এর সকল প্রজেক্ট ও টুলস এক জায়গায়।</p>
       </div>
@@ -49,7 +49,7 @@ function _toolCard(tool) {
   return `
     <div class="tool-card">
       <div class="tool-card-top">
-        <div class="tool-icon">${tool.icon}</div>
+        <div class="tool-icon icon-box icon-box-lg">${tool.icon}</div>
         <div class="tool-badges">
           ${tool.new   ? '<span class="badge badge-new">নতুন</span>'   : ''}
           ${tool.beta  ? '<span class="badge badge-beta">Beta</span>'  : ''}
@@ -63,7 +63,7 @@ function _toolCard(tool) {
       </div>
       <div class="tool-actions">
         <a href="${tool.url}" class="btn btn-primary" target="${tool.external ? '_blank' : '_self'}" rel="noopener">
-          ${tool.external ? 'ভিজিট করুন ↗' : 'খুলুন →'}
+          ${tool.external ? 'ভিজিট করুন <i class="fa-solid fa-arrow-up-right-from-square"></i>' : 'খুলুন <i class="fa-solid fa-arrow-right"></i>'}
         </a>
         ${tool.github ? `
           <a href="${tool.github}" class="btn btn-ghost" target="_blank" rel="noopener" aria-label="GitHub">
@@ -84,42 +84,42 @@ function _toolCard(tool) {
 }
 
 const TOOL_CATS = [
-  { slug: 'all',      name: 'সব',        icon: '🌐' },
-  { slug: 'edu',      name: 'শিক্ষা',    icon: '📚' },
-  { slug: 'ecom',     name: 'ই-কমার্স',  icon: '🛒' },
-  { slug: 'ngo',      name: 'NGO',       icon: '🤝' },
-  { slug: 'utility',  name: 'ইউটিলিটি', icon: '⚙️' },
+  { slug: 'all',      name: 'সব',        icon: '<i class="fa-solid fa-globe"></i>' },
+  { slug: 'edu',      name: 'শিক্ষা',    icon: '<i class="fa-solid fa-book-open"></i>' },
+  { slug: 'ecom',     name: 'ই-কমার্স',  icon: '<i class="fa-solid fa-cart-shopping"></i>' },
+  { slug: 'ngo',      name: 'NGO',       icon: '<i class="fa-solid fa-handshake"></i>' },
+  { slug: 'utility',  name: 'ইউটিলিটি', icon: '<i class="fa-solid fa-gear"></i>' },
 ];
 
 // Add / update your own Tech Verse projects here
 const TOOLS = [
   {
-    name: 'Tech Verse Learn', icon: '📚', cat: 'edu', free: true, new: false, beta: false,
+    name: 'Tech Verse Learn', icon: '<i class="fa-solid fa-book-open"></i>', cat: 'edu', free: true, new: false, beta: false,
     desc: 'বাংলায় প্রযুক্তি শিক্ষার সবচেয়ে বড় প্ল্যাটফর্ম। ভিডিও কোর্স, আর্টিকেল ও প্রজেক্ট।',
     tags: ['শিক্ষা', 'কোর্স', 'বাংলা'], url: '/learn', external: false, github: '',
   },
   {
-    name: 'Tech Verse Blog', icon: '✍️', cat: 'edu', free: true, new: false, beta: false,
+    name: 'Tech Verse Blog', icon: '<i class="fa-solid fa-pen"></i>', cat: 'edu', free: true, new: false, beta: false,
     desc: 'আধুনিক প্রযুক্তির টিউটোরিয়াল, গাইড ও সর্বশেষ খবর।',
     tags: ['ব্লগ', 'টিউটোরিয়াল'], url: '/blog', external: false, github: '',
   },
   {
-    name: 'Vive Shop', icon: '🛒', cat: 'ecom', free: false, new: false, beta: false,
+    name: 'Vive Shop', icon: '<i class="fa-solid fa-cart-shopping"></i>', cat: 'ecom', free: false, new: false, beta: false,
     desc: 'বাংলাদেশের স্মার্ট বাংলা ই-কমার্স প্ল্যাটফর্ম — Firebase ও Firestore চালিত।',
     tags: ['e-commerce', 'firebase', 'বাংলা'], url: 'https://viveshop.vercel.app', external: true, github: '',
   },
   {
-    name: 'Rupsha NGO', icon: '🤝', cat: 'ngo', free: true, new: false, beta: false,
+    name: 'Rupsha NGO', icon: '<i class="fa-solid fa-handshake"></i>', cat: 'ngo', free: true, new: false, beta: false,
     desc: 'রূপসা জনকল্যাণ ফাউন্ডেশনের অফিসিয়াল ওয়েবসাইট।',
     tags: ['ngo', 'community'], url: 'https://rupsha.org', external: true, github: '',
   },
   {
-    name: 'Imran Portfolio', icon: '👤', cat: 'utility', free: true, new: false, beta: false,
+    name: 'Imran Portfolio', icon: '<i class="fa-solid fa-user"></i>', cat: 'utility', free: true, new: false, beta: false,
     desc: 'দ্বিভাষিক (বাংলা/ইংরেজি) ব্যক্তিগত পোর্টফোলিও সাইট।',
     tags: ['portfolio', 'bilingual'], url: 'https://imran.vercel.app', external: true, github: '',
   },
   {
-    name: 'Al-Quran PWA', icon: '📖', cat: 'edu', free: true, new: true, beta: false,
+    name: 'Al-Quran PWA', icon: '<i class="fa-solid fa-book-open"></i>', cat: 'edu', free: true, new: true, beta: false,
     desc: 'সম্পূর্ণ আল-কুরআন — বাংলা অনুবাদ ও তিলাওয়াত সহ, অফলাইন PWA।',
     tags: ['quran', 'pwa', 'অফলাইন'], url: 'https://quranresource.vercel.app', external: true, github: '',
   },

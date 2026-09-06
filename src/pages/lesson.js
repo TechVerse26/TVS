@@ -47,7 +47,7 @@ export async function renderLesson() {
       <!-- Lesson Topbar -->
       <div class="lesson-topbar">
         <div class="lesson-topbar-inner">
-          <a href="/course/${courseId}" class="back-link">← কোর্সে ফিরুন</a>
+          <a href="/course/${courseId}" class="back-link"><i class="fa-solid fa-arrow-left"></i> কোর্সে ফিরুন</a>
           <div class="lesson-progress-mini">
             <div class="progress-track thin">
               <div class="progress-fill" style="width:${progress}%"></div>
@@ -65,7 +65,7 @@ export async function renderLesson() {
             ${allLessons.map((l, i) => `
               <a href="/course/${courseId}/lesson/${l.id}"
                 class="ls-item ${l.id === lessonId ? 'active' : ''} ${completedSet.has(l.id) ? 'done' : ''}">
-                <span class="ls-num">${completedSet.has(l.id) ? '✓' : i + 1}</span>
+                <span class="ls-num">${completedSet.has(l.id) ? '<i class="fa-solid fa-check"></i>' : i + 1}</span>
                 <span class="ls-title">${l.title}</span>
               </a>`).join('')}
           </div>
@@ -74,7 +74,7 @@ export async function renderLesson() {
         <!-- Main Content -->
         <main class="lesson-main">
           <div class="lesson-type-badge">
-            ${lesson.type === 'video' ? '🎬 ভিডিও লেসন' : '📄 পড়ার লেসন'}
+            ${lesson.type === 'video' ? '<i class="fa-solid fa-clapperboard"></i> ভিডিও লেসন' : '<i class="fa-solid fa-file-lines"></i> পড়ার লেসন'}
           </div>
           <h1 class="lesson-title">${lesson.title}</h1>
 
@@ -92,20 +92,20 @@ export async function renderLesson() {
           <div class="lesson-actions">
             ${prevLesson ? `
               <a href="/course/${courseId}/lesson/${prevLesson.id}" class="btn btn-ghost">
-                ← আগের লেসন
+                <i class="fa-solid fa-arrow-left"></i> আগের লেসন
               </a>` : '<div></div>'}
 
             <button class="btn ${isDone ? 'btn-ghost' : 'btn-primary'}" id="complete-btn"
               onclick="LessonPage.markComplete()" ${isDone ? 'disabled' : ''}>
-              ${isDone ? '✓ সম্পন্ন হয়েছে' : 'সম্পন্ন হিসেবে চিহ্নিত করুন'}
+              ${isDone ? '<i class="fa-solid fa-check"></i> সম্পন্ন হয়েছে' : 'সম্পন্ন হিসেবে চিহ্নিত করুন'}
             </button>
 
             ${nextLesson ? `
               <a href="/course/${courseId}/lesson/${nextLesson.id}" class="btn btn-primary">
-                পরের লেসন →
+                পরের লেসন <i class="fa-solid fa-arrow-right"></i>
               </a>` : `
               <button class="btn btn-primary" onclick="LessonPage.finish()">
-                🎉 কোর্স শেষ করুন
+                <i class="fa-solid fa-trophy"></i> কোর্স শেষ করুন
               </button>`}
           </div>
         </main>
@@ -116,7 +116,7 @@ export async function renderLesson() {
   window.LessonPage = {
     async markComplete() {
       const btn = document.getElementById('complete-btn');
-      btn.textContent = 'সেভ হচ্ছে...'; btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...'; btn.disabled = true;
       try {
         const { doc, updateDoc, arrayUnion } =
           await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
@@ -124,15 +124,15 @@ export async function renderLesson() {
           doc(window.__firebase.db, 'enrollments', `${user.uid}_${courseId}`),
           { completedLessons: arrayUnion(lessonId) }
         );
-        btn.textContent = '✓ সম্পন্ন হয়েছে';
-        window.Toast.show('লেসন সম্পন্ন! 🎉', 'success');
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> সম্পন্ন হয়েছে';
+        window.Toast.show('লেসন সম্পন্ন! <i class="fa-solid fa-circle-check"></i>', 'success');
         // Update sidebar
         document.querySelector(`.ls-item[href="/course/${courseId}/lesson/${lessonId}"]`)
           ?.classList.add('done');
         if (nextLesson) setTimeout(() => window.App.navigate(`/course/${courseId}/lesson/${nextLesson.id}`), 1200);
       } catch {
         window.Toast.show('সেভ ব্যর্থ হয়েছে।', 'error');
-        btn.disabled = false; btn.textContent = 'সম্পন্ন হিসেবে চিহ্নিত করুন';
+        btn.disabled = false; btn.innerHTML = 'সম্পন্ন হিসেবে চিহ্নিত করুন';
       }
     },
 
@@ -144,7 +144,7 @@ export async function renderLesson() {
           doc(window.__firebase.db, 'enrollments', `${user.uid}_${courseId}`),
           { completed: true, completedAt: new Date() }
         );
-        window.Toast.show('অভিনন্দন! কোর্স সম্পন্ন হয়েছে! 🏆', 'success');
+        window.Toast.show('অভিনন্দন! কোর্স সম্পন্ন হয়েছে! <i class="fa-solid fa-trophy"></i>', 'success');
         window.App.navigate(`/course/${courseId}`);
       } catch {
         window.App.navigate(`/course/${courseId}`);

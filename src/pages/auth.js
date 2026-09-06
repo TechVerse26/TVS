@@ -53,7 +53,7 @@ export async function renderAuth() {
             <label for="login-pass">পাসওয়ার্ড</label>
             <div class="pass-wrap">
               <input type="password" id="login-pass" placeholder="পাসওয়ার্ড" autocomplete="current-password"/>
-              <button class="pass-toggle" type="button" onclick="AuthPage.togglePass('login-pass')" aria-label="পাসওয়ার্ড দেখুন">👁</button>
+              <button class="pass-toggle" type="button" id="toggle-login-pass" onclick="AuthPage.togglePass('login-pass')" aria-label="পাসওয়ার্ড দেখুন"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <button class="btn btn-primary full-width" id="login-btn" onclick="AuthPage.emailLogin()">লগইন করুন</button>
@@ -84,7 +84,7 @@ export async function renderAuth() {
             <label for="reg-pass">পাসওয়ার্ড</label>
             <div class="pass-wrap">
               <input type="password" id="reg-pass" placeholder="কমপক্ষে ৬ অক্ষর" autocomplete="new-password"/>
-              <button class="pass-toggle" type="button" onclick="AuthPage.togglePass('reg-pass')" aria-label="পাসওয়ার্ড দেখুন">👁</button>
+              <button class="pass-toggle" type="button" id="toggle-reg-pass" onclick="AuthPage.togglePass('reg-pass')" aria-label="পাসওয়ার্ড দেখুন"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <button class="btn btn-primary full-width" id="reg-btn" onclick="AuthPage.emailRegister()">অ্যাকাউন্ট তৈরি করুন</button>
@@ -98,7 +98,7 @@ export async function renderAuth() {
             <input type="email" id="reset-email" placeholder="আপনার ইমেইল"/>
           </div>
           <button class="btn btn-primary full-width" onclick="AuthPage.resetPassword()">রিসেট লিংক পাঠান</button>
-          <button class="link-btn" onclick="AuthPage.switchTab('login')">← লগইনে ফিরুন</button>
+          <button class="link-btn" onclick="AuthPage.switchTab('login')"><i class="fa-solid fa-arrow-left"></i> লগইনে ফিরুন</button>
         </div>
       </div>
     </div>
@@ -149,7 +149,7 @@ export async function renderAuth() {
       btn.textContent = 'তৈরি হচ্ছে...'; btn.disabled = true;
       try {
         await Auth.registerWithEmail(email, pass, name);
-        window.Toast.show('অ্যাকাউন্ট তৈরি হয়েছে! স্বাগতম 🎉', 'success');
+        window.Toast.show('অ্যাকাউন্ট তৈরি হয়েছে! স্বাগতম <i class="fa-solid fa-circle-check"></i>', 'success');
         window.App.navigate('/');
       } catch(e) {
         window.Toast.show('রেজিস্টার ব্যর্থ: ' + _friendlyError(e.code), 'error');
@@ -170,7 +170,10 @@ export async function renderAuth() {
 
     togglePass(id) {
       const input = document.getElementById(id);
-      input.type = input.type === 'password' ? 'text' : 'password';
+      const shown = input.type === 'password';
+      input.type  = shown ? 'text' : 'password';
+      const btn   = document.getElementById(`toggle-${id}`);
+      if (btn) btn.innerHTML = `<i class="fa-solid ${shown ? 'fa-eye-slash' : 'fa-eye'}"></i>`;
     }
   };
 }

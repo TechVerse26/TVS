@@ -16,7 +16,7 @@ export async function renderHome() {
         <div class="grid-lines"></div>
       </div>
       <div class="hero-content">
-        <div class="hero-badge">🚀 বাংলাদেশের #১ টেক প্ল্যাটফর্ম</div>
+        <div class="hero-badge"><i class="fa-solid fa-rocket icon-accent"></i> বাংলাদেশের #১ টেক প্ল্যাটফর্ম</div>
         <h1 class="hero-title">
           প্রযুক্তি শিখুন,<br/>
           <span class="gradient-text">ভবিষ্যৎ গড়ুন</span>
@@ -49,7 +49,7 @@ export async function renderHome() {
         <div class="categories-grid" id="categories-grid">
           ${CATEGORIES.map(c => `
             <a href="/blog?cat=${c.slug}" class="cat-card">
-              <span class="cat-icon">${c.icon}</span>
+              <span class="cat-icon icon-box icon-box-lg">${c.icon}</span>
               <span class="cat-name">${c.name}</span>
             </a>
           `).join('')}
@@ -62,7 +62,7 @@ export async function renderHome() {
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">সাম্প্রতিক পোস্ট</h2>
-          <a href="/blog" class="see-all">সব দেখুন →</a>
+          <a href="/blog" class="see-all">সব দেখুন <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="posts-grid" id="home-posts">
           ${[1,2,3].map(() => PostCard.skeleton()).join('')}
@@ -129,12 +129,12 @@ async function _loadPosts() {
 }
 
 const CATEGORIES = [
-  { slug: 'javascript', name: 'JavaScript', icon: '⚡' },
-  { slug: 'firebase',   name: 'Firebase',   icon: '🔥' },
-  { slug: 'pwa',        name: 'PWA',        icon: '📱' },
-  { slug: 'css',        name: 'CSS',        icon: '🎨' },
-  { slug: 'python',     name: 'Python',     icon: '🐍' },
-  { slug: 'tools',      name: 'টুলস',        icon: '🛠️' },
+  { slug: 'javascript', name: 'JavaScript', icon: '<i class="fa-solid fa-bolt"></i>' },
+  { slug: 'firebase',   name: 'Firebase',   icon: '<i class="fa-solid fa-fire"></i>' },
+  { slug: 'pwa',        name: 'PWA',        icon: '<i class="fa-solid fa-mobile-screen-button"></i>' },
+  { slug: 'css',        name: 'CSS',        icon: '<i class="fa-solid fa-palette"></i>' },
+  { slug: 'python',     name: 'Python',     icon: '<i class="fa-solid fa-terminal"></i>' },
+  { slug: 'tools',      name: 'টুলস',        icon: '<i class="fa-solid fa-screwdriver-wrench"></i>' },
 ];
 
 const DEMO_POSTS = [

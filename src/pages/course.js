@@ -52,15 +52,15 @@ export async function renderCourse() {
             <div class="course-hero-info">
               <div class="breadcrumb">
                 <a href="/learn">লার্নিং</a>
-                <span>›</span>
+                <span><i class="fa-solid fa-chevron-right icon-muted" style="font-size:.7em"></i></span>
                 <span>${course.track || 'কোর্স'}</span>
               </div>
               <h1>${course.title}</h1>
               <p>${course.description || 'এই কোর্সে হাতে-কলমে শিখবেন — ধাপে ধাপে।'}</p>
               <div class="course-meta-row">
                 <span class="course-level level-${course.level}">${course.level || 'শিক্ষার্থী'}</span>
-                <span>📖 ${course.lessons || lessons.length} লেসন</span>
-                <span>⏱ ${course.duration || '—'}</span>
+                <span><i class="fa-solid fa-book-open icon-muted"></i> ${course.lessons || lessons.length} লেসন</span>
+                <span><i class="fa-solid fa-clock icon-muted"></i> ${course.duration || '—'}</span>
               </div>
               ${isEnrolled ? `
                 <div class="progress-bar-wrap">
@@ -73,7 +73,7 @@ export async function renderCourse() {
                   </div>
                 </div>
                 <a href="/course/${id}/lesson/${lessons.find(l=>!completedSet.has(l.id))?.id || lessons[0]?.id}" class="btn btn-primary">
-                  ${progress > 0 ? 'পড়া চালিয়ে যান →' : 'শুরু করুন →'}
+                  ${progress > 0 ? 'পড়া চালিয়ে যান <i class="fa-solid fa-arrow-right"></i>' : 'শুরু করুন <i class="fa-solid fa-arrow-right"></i>'}
                 </a>
               ` : `
                 <button class="btn btn-primary" id="enroll-btn" onclick="CoursePage.enroll()">
@@ -105,7 +105,7 @@ export async function renderCourse() {
           <div class="sidebar-card">
             <h3>এই কোর্সে শিখবেন</h3>
             <ul class="what-learn">
-              ${(course.outcomes || DEMO_OUTCOMES).map(o => `<li>✓ ${o}</li>`).join('')}
+              ${(course.outcomes || DEMO_OUTCOMES).map(o => `<li><i class="fa-solid fa-check icon-accent"></i> ${o}</li>`).join('')}
             </ul>
           </div>
           ${course.tags?.length ? `
@@ -132,7 +132,7 @@ export async function renderCourse() {
           doc(window.__firebase.db, 'enrollments', `${window.__user.uid}_${id}`),
           { uid: window.__user.uid, courseId: id, enrolledAt: new Date(), completedLessons: [], completed: false }
         );
-        window.Toast.show('এনরোল সফল হয়েছে! 🎉', 'success');
+        window.Toast.show('এনরোল সফল হয়েছে! <i class="fa-solid fa-circle-check"></i>', 'success');
         window.App.navigate(`/course/${id}`);
       } catch (e) {
         window.Toast.show('এনরোল ব্যর্থ হয়েছে।', 'error');
@@ -147,7 +147,7 @@ function _lessonItem(lesson, index, completedSet, isEnrolled) {
   const locked = !isEnrolled && index > 0;
   return `
     <div class="lesson-item ${done ? 'done' : ''} ${locked ? 'locked' : ''}">
-      <div class="lesson-num">${done ? '✓' : locked ? '🔒' : index + 1}</div>
+      <div class="lesson-num">${done ? '<i class="fa-solid fa-check"></i>' : locked ? '<i class="fa-solid fa-lock"></i>' : index + 1}</div>
       <div class="lesson-info">
         <div class="lesson-title">
           ${locked
@@ -155,7 +155,7 @@ function _lessonItem(lesson, index, completedSet, isEnrolled) {
             : `<a href="/course/${window.__routeParams?.id}/lesson/${lesson.id}">${lesson.title}</a>`}
         </div>
         <div class="lesson-meta">
-          ${lesson.type === 'video' ? '🎬 ভিডিও' : '📄 পড়া'}
+          ${lesson.type === 'video' ? '<i class="fa-solid fa-clapperboard"></i> ভিডিও' : '<i class="fa-solid fa-file-lines"></i> পড়া'}
           ${lesson.duration ? `· ${lesson.duration}` : ''}
         </div>
       </div>

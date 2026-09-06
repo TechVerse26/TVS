@@ -107,11 +107,11 @@ async function _fetchPosts(reset = false) {
 }
 
 const CATS = [
-  { slug: 'javascript', name: 'JavaScript', icon: '⚡' },
-  { slug: 'firebase',   name: 'Firebase',   icon: '🔥' },
-  { slug: 'pwa',        name: 'PWA',        icon: '📱' },
-  { slug: 'css',        name: 'CSS',        icon: '🎨' },
-  { slug: 'python',     name: 'Python',     icon: '🐍' },
+  { slug: 'javascript', name: 'JavaScript', icon: '<i class="fa-solid fa-bolt"></i>' },
+  { slug: 'firebase',   name: 'Firebase',   icon: '<i class="fa-solid fa-fire"></i>' },
+  { slug: 'pwa',        name: 'PWA',        icon: '<i class="fa-solid fa-mobile-screen-button"></i>' },
+  { slug: 'css',        name: 'CSS',        icon: '<i class="fa-solid fa-palette"></i>' },
+  { slug: 'python',     name: 'Python',     icon: '<i class="fa-solid fa-terminal"></i>' },
 ];
 
 const DEMO = [

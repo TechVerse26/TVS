@@ -9,7 +9,7 @@ export async function renderLearn() {
   el.innerHTML = `
     <div class="page-hero small-hero">
       <div class="container">
-        <div class="hero-badge">📚 সম্পূর্ণ বাংলায়</div>
+        <div class="hero-badge"><i class="fa-solid fa-book-open icon-accent"></i> সম্পূর্ণ বাংলায়</div>
         <h1>লার্নিং হাব</h1>
         <p>হাতে-কলমে শিখুন — ভিডিও, আর্টিকেল ও প্রজেক্ট সহ।</p>
       </div>
@@ -113,12 +113,12 @@ async function _loadUserStats() {
 }
 
 const TRACKS = [
-  { slug: 'all',        name: 'সব',         icon: '🌐' },
-  { slug: 'webdev',     name: 'Web Dev',    icon: '💻' },
-  { slug: 'javascript', name: 'JavaScript', icon: '⚡' },
-  { slug: 'firebase',   name: 'Firebase',   icon: '🔥' },
-  { slug: 'python',     name: 'Python',     icon: '🐍' },
-  { slug: 'design',     name: 'UI/UX',      icon: '🎨' },
+  { slug: 'all',        name: 'সব',         icon: '<i class="fa-solid fa-globe"></i>' },
+  { slug: 'webdev',     name: 'Web Dev',    icon: '<i class="fa-solid fa-laptop-code"></i>' },
+  { slug: 'javascript', name: 'JavaScript', icon: '<i class="fa-solid fa-bolt"></i>' },
+  { slug: 'firebase',   name: 'Firebase',   icon: '<i class="fa-solid fa-fire"></i>' },
+  { slug: 'python',     name: 'Python',     icon: '<i class="fa-solid fa-terminal"></i>' },
+  { slug: 'design',     name: 'UI/UX',      icon: '<i class="fa-solid fa-palette"></i>' },
 ];
 
 export const DEMO_COURSES = [
