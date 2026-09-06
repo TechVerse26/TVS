@@ -83,3 +83,44 @@
   #toast-container { right: .75rem; left: .75rem; bottom: .75rem; }
   .toast { min-width: unset; max-width: 100%; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   Icon System — সব fa-solid আইকনের জন্য একক, স্মার্ট, স্ট্রং স্টাইল
+   ══════════════════════════════════════════════════════════ */
+i[class*="fa-"] { line-height: 1; }
+
+/* Standalone accent icon (nav/back arrows, inline check/x, bell, heart…) */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.icon-accent { color: var(--brand-1); }
+.icon-muted  { color: var(--text-3); }
+
+/* Boxed icon — badge/card headers (category, tool, stat, quick-action) */
+.icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(99,102,241,.13), rgba(139,92,246,.13));
+  color: var(--brand-1);
+}
+.icon-box.icon-box-sm { width: 34px;  height: 34px;  font-size: 1rem; }
+.icon-box.icon-box-md { width: 44px;  height: 44px;  font-size: 1.15rem; border-radius: var(--radius-lg); }
+.icon-box.icon-box-lg { width: 56px;  height: 56px;  font-size: 1.5rem;  border-radius: var(--radius-lg); }
+
+[data-theme="dark"] .icon-box {
+  background: linear-gradient(135deg, rgba(99,102,241,.22), rgba(139,92,246,.22));
+}
+
+/* Semantic state tints, reused by icon-box or plain .icon */
+.icon-success { color: #059669; }
+.icon-danger  { color: #dc2626; }
+.icon-warning { color: #d97706; }
+
+.hero-badge, .qa-icon, .cat-icon, .tool-icon, .asc-icon, .ov-icon, .nl-icon,
+.notif-icon, .admin-nav-icon, .lesson-type-badge { line-height: 1; }
