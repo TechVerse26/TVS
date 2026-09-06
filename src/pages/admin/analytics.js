@@ -26,7 +26,7 @@ export async function renderAnalytics() {
         <div class="analytics-overview" id="analytics-overview">
           ${OV_CARDS.map(c => `
             <div class="ov-card">
-              <div class="ov-icon">${c.icon}</div>
+              <div class="ov-icon icon-box icon-box-md">${c.icon}</div>
               <div class="ov-info">
                 <strong id="ov-${c.key}">—</strong>
                 <span>${c.label}</span>
@@ -38,7 +38,7 @@ export async function renderAnalytics() {
         <!-- Top Posts -->
         <div class="analytics-grid">
           <div class="analytics-card">
-            <h3>🔥 সবচেয়ে বেশি পঠিত পোস্ট</h3>
+            <h3><i class="fa-solid fa-fire icon-accent"></i> সবচেয়ে বেশি পঠিত পোস্ট</h3>
             <div id="top-posts">
               <div class="page-loader" style="min-height:100px"><span class="loader-ring"></span></div>
             </div>
@@ -46,7 +46,7 @@ export async function renderAnalytics() {
 
           <!-- Top Courses -->
           <div class="analytics-card">
-            <h3>📚 সবচেয়ে এনরোলড কোর্স</h3>
+            <h3><i class="fa-solid fa-book-open icon-accent"></i> সবচেয়ে এনরোলড কোর্স</h3>
             <div id="top-courses">
               <div class="page-loader" style="min-height:100px"><span class="loader-ring"></span></div>
             </div>
@@ -55,13 +55,13 @@ export async function renderAnalytics() {
 
         <!-- Category breakdown -->
         <div class="analytics-card full-width" style="margin-top:1.5rem">
-          <h3>📊 ক্যাটাগরি অনুযায়ী পোস্ট</h3>
+          <h3><i class="fa-solid fa-chart-column icon-accent"></i> ক্যাটাগরি অনুযায়ী পোস্ট</h3>
           <div id="cat-breakdown" class="cat-chart"></div>
         </div>
 
         <!-- Firebase Analytics Note -->
         <div class="analytics-note">
-          <span>💡</span>
+          <span class="icon icon-accent"><i class="fa-solid fa-lightbulb"></i></span>
           <p>বিস্তারিত ভিজিটর Analytics-এর জন্য
             <a href="https://analytics.google.com" target="_blank" rel="noopener">
               Firebase Analytics Console
@@ -162,8 +162,8 @@ function _renderCatChart(posts) {
 }
 
 const OV_CARDS = [
-  { key:'posts',    icon:'📝', label:'মোট পোস্ট'       },
-  { key:'users',    icon:'👥', label:'মোট ব্যবহারকারী'  },
-  { key:'enrolls',  icon:'🎓', label:'মোট এনরোলমেন্ট'  },
-  { key:'comments', icon:'💬', label:'মোট মন্তব্য'      },
+  { key:'posts',    icon:'<i class="fa-solid fa-file-lines"></i>', label:'মোট পোস্ট'       },
+  { key:'users',    icon:'<i class="fa-solid fa-users"></i>', label:'মোট ব্যবহারকারী'  },
+  { key:'enrolls',  icon:'<i class="fa-solid fa-graduation-cap"></i>', label:'মোট এনরোলমেন্ট'  },
+  { key:'comments', icon:'<i class="fa-solid fa-comments"></i>', label:'মোট মন্তব্য'      },
 ];

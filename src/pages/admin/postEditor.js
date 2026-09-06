@@ -54,10 +54,10 @@ export async function renderPostEditor() {
                 <button type="button" class="tb-btn" onclick="PostEditor.heading()"       title="Heading">H2</button>
                 <button type="button" class="tb-btn" onclick="PostEditor.wrap('\`','\`')" title="Code">{'}'}</button>
                 <button type="button" class="tb-btn" onclick="PostEditor.codeBlock()"    title="Code Block">```</button>
-                <button type="button" class="tb-btn" onclick="PostEditor.listItem()"     title="List">• তালিকা</button>
+                <button type="button" class="tb-btn" onclick="PostEditor.listItem()"     title="List"><i class="fa-solid fa-list-ul"></i> তালিকা</button>
                 <div class="tb-sep"></div>
                 <button type="button" class="tb-btn" onclick="PostEditor.togglePreview()" id="preview-toggle">
-                  👁 প্রিভিউ
+                  <i class="fa-solid fa-eye"></i> প্রিভিউ
                 </button>
               </div>
               <div class="editor-split">
@@ -164,7 +164,7 @@ export async function renderPostEditor() {
           data.authorId  = window.__user.uid;
           data.author    = window.__user.displayName || 'Admin';
           await addDoc(collection(window.__firebase.db, 'posts'), data);
-          window.Toast.show('পোস্ট প্রকাশিত হয়েছে! 🎉', 'success');
+          window.Toast.show('পোস্ট প্রকাশিত হয়েছে! <i class="fa-solid fa-circle-check"></i>', 'success');
         }
         window.App.navigate('/admin/posts');
       } catch (e) {
@@ -193,7 +193,7 @@ export async function renderPostEditor() {
       const isShown = !preview.classList.contains('hidden');
       preview.classList.toggle('hidden', isShown);
       ta.classList.toggle('hidden', !isShown);
-      btn.textContent = isShown ? '👁 প্রিভিউ' : '✏️ সম্পাদনা';
+      btn.innerHTML = isShown ? '<i class="fa-solid fa-eye"></i> প্রিভিউ' : '<i class="fa-solid fa-pen-to-square"></i> সম্পাদনা';
       if (!isShown) this._renderPreview();
     },
 
@@ -222,14 +222,14 @@ function _md(text) {
 
 function _sidebar(active) {
   const ADMIN_NAV = [
-    { href: '/admin',                    icon: '📊', label: 'ড্যাশবোর্ড'    },
-    { href: '/admin/posts',              icon: '✍️', label: 'পোস্টসমূহ'     },
-    { href: '/admin/posts/new',          icon: '➕', label: 'নতুন পোস্ট'    },
-    { href: '/admin/courses',            icon: '📚', label: 'কোর্সসমূহ'     },
-    { href: '/admin/users',              icon: '👥', label: 'ব্যবহারকারী'   },
-    { href: '/admin/comments',           icon: '💬', label: 'মন্তব্যসমূহ'   },
-    { href: '/admin/notifications/send', icon: '🔔', label: 'নোটিফিকেশন'    },
-    { href: '/admin/analytics',          icon: '📈', label: 'Analytics'     },
+    { href: '/admin',                    icon: '<i class="fa-solid fa-chart-column"></i>', label: 'ড্যাশবোর্ড'    },
+    { href: '/admin/posts',              icon: '<i class="fa-solid fa-pen"></i>', label: 'পোস্টসমূহ'     },
+    { href: '/admin/posts/new',          icon: '<i class="fa-solid fa-plus"></i>', label: 'নতুন পোস্ট'    },
+    { href: '/admin/courses',            icon: '<i class="fa-solid fa-book-open"></i>', label: 'কোর্সসমূহ'     },
+    { href: '/admin/users',              icon: '<i class="fa-solid fa-users"></i>', label: 'ব্যবহারকারী'   },
+    { href: '/admin/comments',           icon: '<i class="fa-solid fa-comments"></i>', label: 'মন্তব্যসমূহ'   },
+    { href: '/admin/notifications/send', icon: '<i class="fa-solid fa-bell"></i>', label: 'নোটিফিকেশন'    },
+    { href: '/admin/analytics',          icon: '<i class="fa-solid fa-chart-line"></i>', label: 'Analytics'     },
   ];
   return `
     <aside class="admin-sidebar">
@@ -246,13 +246,13 @@ function _sidebar(active) {
       <nav class="admin-nav">
         ${ADMIN_NAV.map(item => `
           <a href="${item.href}" class="admin-nav-link ${item.href === active ? 'active' : ''}">
-            <span class="admin-nav-icon">${item.icon}</span>
+            <span class="admin-nav-icon icon">${item.icon}</span>
             <span>${item.label}</span>
           </a>`).join('')}
       </nav>
       <div class="admin-sidebar-footer">
         <a href="/" class="admin-nav-link">
-          <span class="admin-nav-icon">←</span>
+          <span class="admin-nav-icon icon"><i class="fa-solid fa-arrow-left"></i></span>
           <span>সাইটে ফিরুন</span>
         </a>
       </div>

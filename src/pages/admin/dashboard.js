@@ -26,13 +26,13 @@ export async function renderAdmin() {
         <nav class="admin-nav">
           ${ADMIN_NAV.map(item => `
             <a href="${item.href}" class="admin-nav-link ${item.href === '/admin' ? 'active' : ''}">
-              <span class="admin-nav-icon">${item.icon}</span>
+              <span class="admin-nav-icon icon">${item.icon}</span>
               <span>${item.label}</span>
             </a>`).join('')}
         </nav>
         <div class="admin-sidebar-footer">
           <a href="/" class="admin-nav-link">
-            <span class="admin-nav-icon">←</span>
+            <span class="admin-nav-icon icon"><i class="fa-solid fa-arrow-left"></i></span>
             <span>সাইটে ফিরুন</span>
           </a>
         </div>
@@ -54,7 +54,7 @@ export async function renderAdmin() {
         <div class="admin-stats-grid" id="admin-stats">
           ${STAT_CARDS.map(s => `
             <div class="admin-stat-card">
-              <div class="asc-icon">${s.icon}</div>
+              <div class="asc-icon icon-box icon-box-lg">${s.icon}</div>
               <div class="asc-info">
                 <strong id="stat-${s.key}">—</strong>
                 <span>${s.label}</span>
@@ -67,22 +67,22 @@ export async function renderAdmin() {
           <h2>দ্রুত কাজ</h2>
           <div class="quick-actions">
             <a href="/admin/posts/new" class="qa-card">
-              <span class="qa-icon">✍️</span>
+              <span class="qa-icon icon-box icon-box-md"><i class="fa-solid fa-pen"></i></span>
               <strong>নতুন পোস্ট</strong>
               <span>ব্লগ আর্টিকেল লিখুন</span>
             </a>
             <a href="/admin/courses/new" class="qa-card">
-              <span class="qa-icon">📚</span>
+              <span class="qa-icon icon-box icon-box-md"><i class="fa-solid fa-book-open"></i></span>
               <strong>নতুন কোর্স</strong>
               <span>লার্নিং কোর্স যোগ করুন</span>
             </a>
             <a href="/admin/notifications/send" class="qa-card">
-              <span class="qa-icon">🔔</span>
+              <span class="qa-icon icon-box icon-box-md"><i class="fa-solid fa-bell"></i></span>
               <strong>নোটিফিকেশন পাঠান</strong>
               <span>সব ব্যবহারকারীকে</span>
             </a>
             <a href="/admin/analytics" class="qa-card">
-              <span class="qa-icon">📊</span>
+              <span class="qa-icon icon-box icon-box-md"><i class="fa-solid fa-chart-column"></i></span>
               <strong>Analytics</strong>
               <span>ট্র্যাফিক ও ভিউ দেখুন</span>
             </a>
@@ -218,19 +218,19 @@ window.AdminDash = {
 };
 
 const ADMIN_NAV = [
-  { href: '/admin',                  icon: '📊', label: 'ড্যাশবোর্ড'   },
-  { href: '/admin/posts',            icon: '✍️', label: 'পোস্টসমূহ'    },
-  { href: '/admin/posts/new',        icon: '➕', label: 'নতুন পোস্ট'   },
-  { href: '/admin/courses',          icon: '📚', label: 'কোর্সসমূহ'    },
-  { href: '/admin/users',            icon: '👥', label: 'ব্যবহারকারী'  },
-  { href: '/admin/comments',         icon: '💬', label: 'মন্তব্যসমূহ'  },
-  { href: '/admin/notifications/send', icon: '🔔', label: 'নোটিফিকেশন' },
-  { href: '/admin/analytics',        icon: '📈', label: 'Analytics'    },
+  { href: '/admin',                  icon: '<i class="fa-solid fa-chart-column"></i>', label: 'ড্যাশবোর্ড'   },
+  { href: '/admin/posts',            icon: '<i class="fa-solid fa-pen"></i>', label: 'পোস্টসমূহ'    },
+  { href: '/admin/posts/new',        icon: '<i class="fa-solid fa-plus"></i>', label: 'নতুন পোস্ট'   },
+  { href: '/admin/courses',          icon: '<i class="fa-solid fa-book-open"></i>', label: 'কোর্সসমূহ'    },
+  { href: '/admin/users',            icon: '<i class="fa-solid fa-users"></i>', label: 'ব্যবহারকারী'  },
+  { href: '/admin/comments',         icon: '<i class="fa-solid fa-comments"></i>', label: 'মন্তব্যসমূহ'  },
+  { href: '/admin/notifications/send', icon: '<i class="fa-solid fa-bell"></i>', label: 'নোটিফিকেশন' },
+  { href: '/admin/analytics',        icon: '<i class="fa-solid fa-chart-line"></i>', label: 'Analytics'    },
 ];
 
 const STAT_CARDS = [
-  { key: 'posts',    icon: '📝', label: 'মোট পোস্ট'          },
-  { key: 'courses',  icon: '📚', label: 'মোট কোর্স'          },
-  { key: 'users',    icon: '👥', label: 'মোট ব্যবহারকারী'    },
-  { key: 'comments', icon: '💬', label: 'মোট মন্তব্য'        },
+  { key: 'posts',    icon: '<i class="fa-solid fa-file-lines"></i>', label: 'মোট পোস্ট'          },
+  { key: 'courses',  icon: '<i class="fa-solid fa-book-open"></i>', label: 'মোট কোর্স'          },
+  { key: 'users',    icon: '<i class="fa-solid fa-users"></i>', label: 'মোট ব্যবহারকারী'    },
+  { key: 'comments', icon: '<i class="fa-solid fa-comments"></i>', label: 'মোট মন্তব্য'        },
 ];

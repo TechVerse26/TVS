@@ -65,7 +65,7 @@ export async function renderNotificationSender() {
           <div class="notif-preview" id="notif-preview">
             <h4>প্রিভিউ</h4>
             <div class="notif-item" style="pointer-events:none">
-              <div class="notif-icon" id="prev-icon">🔔</div>
+              <div class="notif-icon icon-box icon-box-sm" id="prev-icon">🔔</div>
               <div class="notif-body">
                 <p id="prev-msg">বার্তা এখানে দেখাবে...</p>
                 <span class="notif-time">এইমাত্র</span>
@@ -74,7 +74,7 @@ export async function renderNotificationSender() {
           </div>
 
           <button class="btn btn-primary" id="send-btn" onclick="NotifSender.send()">
-            🔔 নোটিফিকেশন পাঠান
+            <i class="fa-solid fa-paper-plane"></i> নোটিফিকেশন পাঠান
           </button>
         </div>
 
@@ -114,7 +114,7 @@ export async function renderNotificationSender() {
       if (target === 'specific' && !uid) { window.Toast.show('UID দিন।', 'warning'); return; }
 
       const btn = document.getElementById('send-btn');
-      btn.textContent = 'পাঠানো হচ্ছে...'; btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পাঠানো হচ্ছে...'; btn.disabled = true;
 
       try {
         const { collection, addDoc, getDocs, query, serverTimestamp } =
@@ -150,7 +150,7 @@ export async function renderNotificationSender() {
       } catch (e) {
         window.Toast.show('পাঠানো ব্যর্থ: ' + e.message, 'error');
       } finally {
-        btn.textContent = '🔔 নোটিফিকেশন পাঠান'; btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> নোটিফিকেশন পাঠান'; btn.disabled = false;
       }
     }
   };
