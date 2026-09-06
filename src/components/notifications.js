@@ -56,7 +56,7 @@ export const Notifications = {
         ${items.length
           ? items.map(n => `
               <div class="notif-item ${n.read ? '' : 'unread'}" onclick="Notifications.open('${n.id}','${n.link||''}')">
-                <div class="notif-icon">${n.icon || '🔔'}</div>
+                <div class="notif-icon icon-box icon-box-sm">${n.icon || '<i class="fa-solid fa-bell"></i>'}</div>
                 <div class="notif-body">
                   <p>${n.message}</p>
                   <span class="notif-time">${_timeAgo(n.createdAt?.toDate?.())}</span>
@@ -114,7 +114,7 @@ export const Notifications = {
       // Foreground message handler
       onMessage(messaging, payload => {
         const { title, body } = payload.notification || {};
-        window.Toast.show(`🔔 ${title}: ${body}`, 'info', 6000);
+        window.Toast.show(`<i class="fa-solid fa-bell"></i> ${title}: ${body}`, 'info', 6000);
         this._unread++;
         this._updateBadge();
       });
@@ -126,7 +126,7 @@ export const Notifications = {
     return `
       <div class="notif-wrap" style="position:relative">
         <button class="nav-btn icon-btn" onclick="Notifications.toggle()" aria-label="নোটিফিকেশন">
-          🔔
+          <i class="fa-solid fa-bell"></i>
           <span id="notif-badge" class="notif-badge" hidden>0</span>
         </button>
         <div id="notif-panel" class="notif-panel" hidden></div>

@@ -22,7 +22,7 @@ export async function requireAdmin() {
     if (!token.claims.admin) {
       document.getElementById('page-content').innerHTML = `
         <div class="error-page">
-          <div class="error-code" style="font-size:4rem">🚫</div>
+          <div class="error-code icon icon-danger" style="font-size:4rem"><i class="fa-solid fa-ban"></i></div>
           <h1>অ্যাক্সেস নেই</h1>
           <p>এই পেজটি শুধুমাত্র Admin-দের জন্য।</p>
           <a href="/" class="btn btn-primary">হোমে ফিরুন</a>

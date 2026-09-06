@@ -45,7 +45,7 @@ export const Footer = {
 
       <div class="footer-bottom">
         <span>© ${new Date().getFullYear()} Tech Verse. সর্বস্বত্ব সংরক্ষিত।</span>
-        <span class="footer-made">Made with ♥ in Bangladesh</span>
+        <span class="footer-made">Made with <i class="fa-solid fa-heart icon-accent"></i> in Bangladesh</span>
       </div>
     `;
   }

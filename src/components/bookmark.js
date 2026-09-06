@@ -68,7 +68,7 @@ export const Bookmark = {
           postId,
           savedAt  : new Date(),
         });
-        window.Toast.show('বুকমার্ক সেভ হয়েছে! 🔖', 'success');
+        window.Toast.show('বুকমার্ক সেভ হয়েছে! <i class="fa-solid fa-bookmark"></i>', 'success');
         if (btn) btn.setAttribute('aria-label', 'বুকমার্ক সরান');
       }
     } catch {

@@ -23,8 +23,8 @@ export const CourseCard = {
             <a href="/course/${course.id}">${course.title}</a>
           </h3>
           <div class="course-card-meta">
-            <span>📖 ${course.lessons || '—'} লেসন</span>
-            <span>⏱ ${course.duration || '—'}</span>
+            <span><i class="fa-solid fa-book-open icon-muted"></i> ${course.lessons || '—'} লেসন</span>
+            <span><i class="fa-solid fa-clock icon-muted"></i> ${course.duration || '—'}</span>
           </div>
           ${progress !== null ? `
             <div class="card-progress">
@@ -34,7 +34,7 @@ export const CourseCard = {
               <span class="progress-pct">${progress}%</span>
             </div>` : ''}
           <a href="/course/${course.id}" class="btn ${enrollment ? 'btn-outline' : 'btn-primary'} full-width" style="margin-top:.75rem">
-            ${enrollment ? (progress === 100 ? '✓ সম্পন্ন' : 'চালিয়ে যান') : 'কোর্স দেখুন'}
+            ${enrollment ? (progress === 100 ? '<i class="fa-solid fa-check"></i> সম্পন্ন' : 'চালিয়ে যান') : 'কোর্স দেখুন'}
           </a>
         </div>
       </article>`;

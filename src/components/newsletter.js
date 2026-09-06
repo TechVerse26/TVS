@@ -12,7 +12,7 @@ export const Newsletter = {
     if (variant === 'inline') {
       return `
         <div class="newsletter-inline">
-          <div class="nl-icon">📬</div>
+          <div class="nl-icon icon-box icon-box-lg"><i class="fa-solid fa-envelope-open-text"></i></div>
           <div class="nl-text">
             <strong>নিউজলেটার সাবস্ক্রাইব করুন</strong>
             <span>নতুন পোস্ট ও কোর্স সরাসরি ইমেইলে পাবেন।</span>
@@ -32,14 +32,14 @@ export const Newsletter = {
         <div class="container">
           <div class="newsletter-card">
             <div class="nl-content">
-              <div class="nl-badge">📬 নিউজলেটার</div>
+              <div class="nl-badge"><i class="fa-solid fa-envelope-open-text"></i> নিউজলেটার</div>
               <h2>সর্বশেষ আপডেট পান</h2>
               <p>প্রতি সপ্তাহে নতুন আর্টিকেল, কোর্স ও টেক নিউজ — সরাসরি আপনার ইনবক্সে।</p>
               <ul class="nl-perks">
-                <li>✓ সাপ্তাহিক টেক নিউজলেটার</li>
-                <li>✓ নতুন কোর্সের আর্লি অ্যাক্সেস</li>
-                <li>✓ এক্সক্লুসিভ টিউটোরিয়াল</li>
-                <li>✓ স্প্যাম নেই, যেকোনো সময় আনসাবস্ক্রাইব</li>
+                <li><i class="fa-solid fa-check icon-accent"></i> সাপ্তাহিক টেক নিউজলেটার</li>
+                <li><i class="fa-solid fa-check icon-accent"></i> নতুন কোর্সের আর্লি অ্যাক্সেস</li>
+                <li><i class="fa-solid fa-check icon-accent"></i> এক্সক্লুসিভ টিউটোরিয়াল</li>
+                <li><i class="fa-solid fa-check icon-accent"></i> স্প্যাম নেই, যেকোনো সময় আনসাবস্ক্রাইব</li>
               </ul>
             </div>
             <div class="nl-form">
@@ -65,7 +65,7 @@ export const Newsletter = {
               </div>
               <button class="btn btn-primary full-width" id="nl-submit-btn"
                 onclick="Newsletter.subscribe('main')">
-                📬 সাবস্ক্রাইব করুন
+                <i class="fa-solid fa-paper-plane"></i> সাবস্ক্রাইব করুন
               </button>
               <p class="nl-privacy">
                 আপনার ইমেইল কখনো শেয়ার করা হবে না।
@@ -95,7 +95,7 @@ export const Newsletter = {
       ? [...document.querySelectorAll('input[name="interest"]:checked')].map(i => i.value)
       : [];
 
-    if (btn) { btn.textContent = 'সাবস্ক্রাইব হচ্ছে...'; btn.disabled = true; }
+    if (btn) { btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সাবস্ক্রাইব হচ্ছে...'; btn.disabled = true; }
 
     try {
       // ১. Firestore-এ সেভ করো
@@ -104,7 +104,7 @@ export const Newsletter = {
       // ২. EmailJS দিয়ে welcome email পাঠাও
       await this._sendWelcomeEmail({ email, name });
 
-      window.Toast.show('সাবস্ক্রাইব সফল হয়েছে! স্বাগত ইমেইল পাঠানো হয়েছে। 🎉', 'success', 5000);
+      window.Toast.show('সাবস্ক্রাইব সফল হয়েছে! স্বাগত ইমেইল পাঠানো হয়েছে। <i class="fa-solid fa-circle-check"></i>', 'success', 5000);
 
       // Form reset
       if (variant === 'inline') {
@@ -120,7 +120,7 @@ export const Newsletter = {
         : 'সাবস্ক্রাইব ব্যর্থ হয়েছে।';
       window.Toast.show(msg, 'error');
     } finally {
-      if (btn) { btn.textContent = '📬 সাবস্ক্রাইব করুন'; btn.disabled = false; }
+      if (btn) { btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> সাবস্ক্রাইব করুন'; btn.disabled = false; }
     }
   },
 

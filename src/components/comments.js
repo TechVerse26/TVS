@@ -104,7 +104,7 @@ export const Comments = {
       if (btn) {
         const cur = parseInt(btn.dataset.likes || '0') + 1;
         btn.dataset.likes = cur;
-        btn.innerHTML = `❤ ${cur}`;
+        btn.innerHTML = `<i class="fa-solid fa-heart icon-accent"></i> ${cur}`;
         btn.disabled  = true;
       }
     } catch { /* silent */ }
@@ -136,11 +136,11 @@ export const Comments = {
             <button class="comment-action-btn" id="like-btn-${comment.id}"
               data-likes="${comment.likes||0}"
               onclick="Comments.like('${comment.id}','${postId}')">
-              ❤ ${comment.likes || 0}
+              <i class="fa-solid fa-heart"></i> ${comment.likes || 0}
             </button>
             ${window.__user ? `
               <button class="comment-action-btn" onclick="Comments.toggleReply('${comment.id}')">
-                ↩ রিপ্লাই
+                <i class="fa-solid fa-reply"></i> রিপ্লাই
               </button>` : ''}
           </div>
           <!-- Reply form -->

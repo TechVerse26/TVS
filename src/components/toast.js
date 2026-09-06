@@ -12,10 +12,10 @@ export const Toast = {
     const id        = 'toast-' + Date.now();
 
     const icons = {
-      success : '✓',
-      error   : '✕',
-      warning : '⚠',
-      info    : 'ℹ',
+      success : '<i class="fa-solid fa-check"></i>',
+      error   : '<i class="fa-solid fa-xmark"></i>',
+      warning : '<i class="fa-solid fa-triangle-exclamation"></i>',
+      info    : '<i class="fa-solid fa-circle-info"></i>',
     };
 
     const toast = document.createElement('div');
@@ -24,7 +24,7 @@ export const Toast = {
     toast.innerHTML = `
       <span class="toast-icon">${icons[type] || icons.info}</span>
       <span class="toast-msg">${message}</span>
-      <button class="toast-close" onclick="Toast.dismiss('${id}')" aria-label="বন্ধ করুন">✕</button>
+      <button class="toast-close" onclick="Toast.dismiss('${id}')" aria-label="বন্ধ করুন"><i class="fa-solid fa-xmark"></i></button>
     `;
 
     container.appendChild(toast);
