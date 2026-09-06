@@ -3,77 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tech Verse — শিক্ষা, প্রযুক্তি এবং উদ্ভাবনের একটি স্মার্ট প্ল্যাটফর্ম" />
-  <meta name="theme-color" content="#0f0f23" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Tech Verse" />
+  <!-- Primary Meta -->
+  <meta name="description" content="Tech Verse — শিক্ষা, প্রযুক্তি এবং উদ্ভাবনের একটি স্মার্ট প্ল্যাটফর্ম" />
+  <meta name="keywords"    content="tech verse, প্রযুক্তি, শিক্ষা, javascript, firebase, web development, বাংলা" />
+  <meta name="author"      content="Tech Verse" />
+  <meta name="robots"      content="index, follow" />
+  <meta name="theme-color" content="#6366f1" />
+
+  <!-- Open Graph (Phase 3 SEO) -->
+  <meta property="og:title"       content="Tech Verse" />
   <meta property="og:description" content="শিক্ষা, প্রযুক্তি এবং উদ্ভাবনের একটি স্মার্ট প্ল্যাটফর্ম" />
-  <meta property="og:type" content="website" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="/public/og-default.png" />
+  <meta property="og:url"         content="https://techverse.vercel.app" />
+  <meta property="og:site_name"   content="Tech Verse" />
+  <meta property="og:locale"      content="bn_BD" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Tech Verse" />
+  <meta name="twitter:description" content="শিক্ষা, প্রযুক্তি এবং উদ্ভাবনের একটি স্মার্ট প্ল্যাটফর্ম" />
+  <meta name="twitter:image"       content="/public/og-default.png" />
 
   <title>Tech Verse</title>
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://techverse.vercel.app" />
+
   <!-- PWA Manifest -->
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="icon" href="/public/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest"        href="/manifest.json" />
+  <link rel="icon"            href="/public/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/public/icon-192.png" />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts — preconnect আগে, তারপর load -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet" />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/style/main.css" />
-  <link rel="stylesheet" href="/style/components.css" />
-  <link rel="stylesheet" href="/style/phase2.css" />
-  <link rel="stylesheet" href="/style/post.css" />
+  <!-- ══════════════════════════════════════
+       CSS — সব ফেজের স্টাইল
+       ══════════════════════════════════════ -->
+  <link rel="stylesheet" href="/style/main.css" />        <!-- Design tokens, layout, navbar, hero -->
+  <link rel="stylesheet" href="/style/components.css" />  <!-- Search overlay, Toast -->
+  <link rel="stylesheet" href="/style/post.css" />        <!-- Single post page -->
+  <link rel="stylesheet" href="/style/phase2.css" />      <!-- Learn, Course, Lesson, Tools, Comments, Notifications, Bookmark -->
+  <link rel="stylesheet" href="/style/phase3.css" />      <!-- Admin, Editor, Analytics, Newsletter -->
 </head>
 <body>
 
-  <!-- App Shell -->
+  <!-- ══════════════════════════════════════
+       App Shell — এখানে JS সব render করবে
+       ══════════════════════════════════════ -->
   <div id="app">
-    <!-- Navbar -->
-    <nav id="navbar"></nav>
 
-    <!-- Search Overlay -->
-    <div id="search-overlay" class="search-overlay" aria-hidden="true">
+    <!-- Navbar (navbar.js render করবে) -->
+    <nav id="navbar" role="navigation" aria-label="প্রধান নেভিগেশন"></nav>
+
+    <!-- Search Overlay (search.js control করবে) -->
+    <div id="search-overlay" class="search-overlay" aria-hidden="true" role="dialog" aria-label="সার্চ">
       <div class="search-modal">
         <div class="search-header">
-          <span class="search-icon">⌕</span>
-          <input type="text" id="search-input" placeholder="খুঁজুন... (Ctrl+K)" autocomplete="off" />
-          <kbd class="search-esc" onclick="window.Search.close()">ESC</kbd>
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="খুঁজুন... (Ctrl+K)"
+            autocomplete="off"
+            aria-label="সার্চ ইনপুট"
+          />
+          <kbd class="search-esc" onclick="window.Search.close()" role="button" tabindex="0">ESC</kbd>
         </div>
-        <div id="search-results" class="search-results"></div>
+        <div id="search-results" class="search-results" role="listbox"></div>
       </div>
     </div>
 
-    <!-- Page Content -->
-    <main id="page-content" role="main"></main>
+    <!-- Page Content (router প্রতিটি পেজ এখানে render করবে) -->
+    <main id="page-content" role="main" aria-live="polite"></main>
 
-    <!-- Footer -->
-    <footer id="footer"></footer>
+    <!-- Footer (footer.js render করবে) -->
+    <footer id="footer" role="contentinfo"></footer>
+
   </div>
 
-  <!-- Toast Notifications -->
-  <div id="toast-container" aria-live="polite"></div>
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite" aria-atomic="false"></div>
 
-  <!-- Firebase SDK -->
+  <!-- ══════════════════════════════════════
+       Firebase SDK + App Bootstrap
+       type="module" ব্যবহার করা হয়েছে
+       কারণ ES Modules দরকার
+       ══════════════════════════════════════ -->
   <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    // ── Firebase SDK ──────────────────────────────────────────
+    import { initializeApp }  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
     import { getAuth }        from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
     import { getFirestore }   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
     import { getAnalytics }   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js';
+
+    // ── তোমার Firebase Config ─────────────────────────────────
+    // ⚠️  src/firebase/config.js ফাইলে তোমার নিজের config বসাও
     import { firebaseConfig } from '/src/firebase/config.js';
 
+    // ── Firebase Initialize ───────────────────────────────────
     const app       = initializeApp(firebaseConfig);
     const auth      = getAuth(app);
     const db        = getFirestore(app);
     const analytics = getAnalytics(app);
 
+    // Global access — সব JS ফাইল window.__firebase ব্যবহার করে
     window.__firebase = { app, auth, db, analytics };
 
-    // Boot the app after Firebase is ready
+    // Auth state এখনো settle হয়নি — undefined রাখো
+    // onAuthStateChanged fire হলে app.js এটা set করবে
+    window.__user = undefined;
+
+    // ── App Boot ──────────────────────────────────────────────
+    // Firebase ready হওয়ার পর App শুরু হবে
     const { App } = await import('/src/app.js');
     App.init();
   </script>
