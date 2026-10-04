@@ -2,7 +2,7 @@
  * Tech Verse — Service Worker
  * Cache-first for assets, Network-first for pages
  */
-const CACHE     = 'tv-v1';
+const CACHE     = 'tv-v01.00.02';
 const CACHE_URLS = [
   '/',
   '/style/main.css',
